@@ -1,27 +1,27 @@
 # homebrew-tap
 
-Homebrew tap for [stxkxs](https://github.com/stxkxs) CLI tools.
+Homebrew tap for [nanohype](https://github.com/nanohype) CLI tools.
 
 ## Install
 
 ```sh
-brew tap stxkxs/tap
+brew tap nanohype/tap
 ```
 
 Then install any tool:
 
 ```sh
-brew install stxkxs/tap/matlock
+brew install nanohype/tap/cloudgov
 ```
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| [matlock](https://github.com/stxkxs/matlock) | Multi-cloud security and cost swiss army knife |
+| [cloudgov](https://github.com/nanohype/cloudgov) | Multi-cloud security and cost swiss army knife |
 
 ## Usage without tapping
 
 ```sh
-brew install stxkxs/tap/<tool>
+brew install nanohype/tap/<tool>
 ```
