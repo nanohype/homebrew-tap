@@ -87,10 +87,12 @@ audits without complaint but silently skips audit's RuboCop cops — the same
 checkout reports one finding as a symlink and two as a real directory. Use
 `cp -R` or a clone, as CI does.
 
-**Never reach for `brew audit --tap`.** This tap is untrusted (`brew tap-info
-nanohype/tap` says so), and Homebrew skips an untrusted tap's formulae under
-`--tap`, exiting 0 having audited nothing. Name formulae explicitly, which is
-what `script/tap-formulae.sh` is for.
+**Never reach for `brew audit --tap`.** Homebrew skips an untrusted tap's
+formulae under `--tap`, exiting 0 having audited nothing, and a tap is untrusted
+until `brew trust nanohype/tap` says otherwise. Named formulae refuse loudly
+instead (`Refusing to load formula ... from untrusted tap`), so name them
+explicitly, which is what `script/tap-formulae.sh` is for. CI trusts the tap
+before it audits; locally, run `brew trust nanohype/tap` once.
 
 ## Renovate
 
