@@ -35,6 +35,15 @@ jobs:
           # gate would pass for the wrong reason.
           cp -R "$GITHUB_WORKSPACE" "$tap_dir"
 
+      - name: Trust the tap
+        # Homebrew 6 loads nothing from a non-official tap until it is trusted,
+        # fully qualified names included: audit refuses with "Refusing to load
+        # formula nanohype/tap/cloudgov from untrusted tap nanohype/tap". The
+        # tap under test is this repository, so CI trusts the whole of it
+        # rather than formula by formula, and a formula added later is covered
+        # without editing this step.
+        run: brew trust nanohype/tap
+
       - name: brew style
         run: brew style nanohype/tap
 
@@ -44,8 +53,9 @@ jobs:
         #
         # Enumerated rather than passed via `brew audit --tap`, too: Homebrew
         # skips an untrusted tap's formulae under --tap and exits 0 having
-        # audited nothing. `brew tap-info nanohype/tap` reports "Untrusted", so
-        # that form would report success while checking nothing.
+        # audited nothing. The step above trusts the tap, but a run where trust
+        # did not take would then report success while checking nothing; named
+        # formulae fail loudly instead.
         #
         # --except=version is a permanent, structural suppression rather than a
         # workaround for one formula. GoReleaser always emits `version` in the
